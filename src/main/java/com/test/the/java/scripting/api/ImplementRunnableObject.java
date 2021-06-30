@@ -1,4 +1,4 @@
-package com.test;
+package com.test.the.java.scripting.api;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
@@ -6,16 +6,16 @@ import javax.script.ScriptEngineManager;
 
 /**
  * @author <a href="mailto:luojianwei@pinming.cn">LuoJianwei</a>
- * @since 2021/6/30 15:50
+ * @since 2021/6/30 17:43
  */
-public class InvokeScriptMethod {
+public class ImplementRunnableObject {
     public static void main(String[] args) throws Exception {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("nashorn");
 
-        // evaluate JavaScript code that defines an object with one method
+        // evaluate JavaScript code that defines a function with one parameter
         engine.eval("var obj = new Object()");
-        engine.eval("obj.hello = function(name) { print('Hello, ' + name) }");
+        engine.eval("obj.run = function() { print('obj.run() method called') }");
 
         // expose object defined in the script to the Java application
         Object obj = engine.get("obj");
@@ -23,8 +23,12 @@ public class InvokeScriptMethod {
         // create an Invocable object by casting the script engine object
         Invocable inv = (Invocable) engine;
 
-        // invoke the method named "hello" on the object defined in the script
-        // with "Script Method!" as the argument
-        inv.invokeMethod(obj, "hello", "Script Method!");
+        // get Runnable interface object
+        Runnable r = inv.getInterface(obj, Runnable.class);
+
+        // start a new thread that runs the script
+        Thread th = new Thread(r);
+        th.start();
+        th.join();
     }
 }

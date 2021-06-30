@@ -1,4 +1,4 @@
-package com.test;
+package com.test.the.java.scripting.api;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;

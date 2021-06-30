@@ -1,4 +1,4 @@
-package com.test;
+package com.test.the.java.scripting.api;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
