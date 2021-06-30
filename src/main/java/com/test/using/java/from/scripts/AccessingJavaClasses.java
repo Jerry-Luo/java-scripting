@@ -21,6 +21,8 @@ public class AccessingJavaClasses {
         // By wrapping various input stream objects as readers,
         // it is possible to execute scripts from files, URLs, and other resources.
         // evaluate JavaScript code
+        // 这个方法能获取到资源，必须先拿到classloader，再用classloader去getResource
+        //URI uri = AccessingJavaClasses.class.getResource("com/test/using/java/from/scripts/AccessingJavaClasses.js").toURI();
         URI uri = AccessingJavaClasses.class.getClassLoader().getResource("com/test/using/java/from/scripts/AccessingJavaClasses.js").toURI();
         //InputStream resourceAsStream = AccessingJavaClasses.class.getClassLoader().getResourceAsStream("com/test/using/java/from/scripts/AccessingJavaClasses.js");
         engine.eval(new java.io.FileReader(new File(uri)));
