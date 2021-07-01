@@ -4,6 +4,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -25,6 +26,7 @@ public class AccessingJavaClasses {
         //URI uri = AccessingJavaClasses.class.getResource("com/test/using/java/from/scripts/AccessingJavaClasses.js").toURI();
         URI uri = AccessingJavaClasses.class.getClassLoader().getResource("com/test/using/java/from/scripts/AccessingJavaClasses.js").toURI();
         //InputStream resourceAsStream = AccessingJavaClasses.class.getClassLoader().getResourceAsStream("com/test/using/java/from/scripts/AccessingJavaClasses.js");
-        engine.eval(new java.io.FileReader(new File(uri)));
+        Object eval = engine.eval(new FileReader(new File(uri)));
+
     }
 }
